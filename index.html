@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redes Sociais L2WarLegends</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: 
+        url('Nova pasta/page 2.png') no-repeat center center fixed,
+        #1a1a2e;
+      background-size: cover;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow-x: hidden;
+    }
+
+    .social-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      width: 100%;
+      padding: 20px;
+    }
+
+    .social-card {
+      background: rgba(26, 26, 46, 0.8);
+      border-radius: 20px;
+      padding: 40px 25px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+    }
+
+    .social-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    }
+
+    .social-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #e4405f, #fd476b, #e1306c, #fd476b);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .social-card:hover::before {
+      opacity: 1;
+    }
+
+    .social-card.instagram::before {
+      background: linear-gradient(90deg, #f09433, #e4405f, #fd476b, #e1306c);
+    }
+
+    .social-card.facebook::before {
+      background: linear-gradient(90deg, #4267b2, #365899, #2d4373);
+    }
+
+    .social-card.youtube::before {
+      background: linear-gradient(90deg, #ff0000, #ff6e40, #e53935);
+    }
+
+    .profile-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #fff;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .social-card:hover .profile-img {
+      transform: scale(1.1);
+    }
+
+    .card-body h3 {
+      font-size: 24px;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    .card-body span {
+      display: block;
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 25px;
+    }
+
+    .link-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    @media (max-width: 480px) {
+      .social-card {
+        padding: 30px 15px;
+      }
+
+      .profile-img {
+        width: 80px;
+        height: 80px;
+      }
+
+      .card-body h3 {
+        font-size: 20px;
+      }
+    }
+
+    .overlay-text {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <div class="social-container">
+    <!-- Instagram -->
+    <div class="social-card instagram" onclick="window.open('https://www.instagram.com/l2warlegends', '_blank')">
+      <img src="Nova pasta/perfil.png" alt="Perfil Instagram L2WarLegends" class="profile-img">
+      <div class="card-body">
+        <h3>L2WarLegends</h3>
+        <span>Instagram</span>
+      </div>
+    </div>
+
+    <!-- Facebook -->
+    <div class="social-card facebook" onclick="window.open('https://www.facebook.com/L2WarLegends', '_blank')">
+      <img src="Nova pasta/perfil.png" alt="Perfil Facebook L2WarLegends" class="profile-img">
+      <div class="card-body">
+        <h3>L2WarLegends</h3>
+        <span>Facebook</span>
+      </div>
+    </div>
+
+    <!-- YouTube -->
+    <div class="social-card youtube" onclick="window.open('https://www.youtube.com/@L2WarLegends', '_blank')">
+      <img src="Nova pasta/youtube.png" alt="Perfil YouTube L2WarLegends" class="profile-img">
+      <div class="card-body">
+        <h3>L2WarLegends</h3>
+        <span>YouTube</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botão Compartilhar -->
+  <div style="position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 100;">
+    <button onclick="compartilhar()" style="
+      padding: 15px 30px;
+      background: linear-gradient(135deg, #ff0000, #e53935);
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: transform 0.2s ease;
+    " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"">
+      Compartilhar L2WarLegends
+    </button>
+  </div>
+
+  <script>
+    function compartilhar() {
+      const texto = "Confira as redes sociais do L2WarLegends!";
+      const url = window.location.href;
+      
+      if (navigator.share) {
+        navigator.share({
+          title: 'L2WarLegends - Redes Sociais',
+          text: texto,
+          url: url
+        });
+      } else {
+        // Fallback: copiar link para área de transferência
+        navigator.clipboard.writeText(url).then(() => {
+          alert('Link copiado para área de transferência! \n\nAgora pode colar em qualquer rede social.');
+        });
+      }
+    }
+  </script>
+</body>
+</html>
